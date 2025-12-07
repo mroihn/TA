@@ -1,0 +1,59 @@
+% ------------------------------------------------------------------- %
+%  PACKAGES CONFIGURATION
+%  ~ Define packages used in the document
+%  AUTHOR: Raden Francisco Trianto Bratadiningrat @NoHaitch
+%  DATE: 2025-10-28
+% ------------------------------------------------------------------- %
+
+% --- Encoding, language ---
+\usepackage[utf8]{inputenc}     % Read .tex source as UTF-8 (allows international characters)
+\usepackage[T1]{fontenc}        % Output font encoding (T1) for correct accented characters & hyphenation
+\usepackage[provide=*,indonesian]{babel}  % Apply Bahasa Indonesia language conventions (captions, hyphenation, dates)
+
+% --- Page layout ---
+\usepackage[
+    top=\defaultmargin,
+    bottom=\defaultmargin,
+    left=\guttermargin,
+    right=\defaultmargin]{geometry}    % Set custom page margins and layout dimensions
+
+% --- Fonts & math ---
+\usepackage{mathptmx}           % Use Times-like font (Times + matching math symbols)
+\usepackage{setspace}           % Control line spacing (e.g., \singlespacing, \onehalfspacing, \doublespacing)
+
+% --- Sectioning & formatting tools ---
+\usepackage{titlesec}           % Customize section/chapter title format (font, spacing, numbering)
+\usepackage{titletoc}           % Customize Table of Contents layout and formatting
+\usepackage{tocbibind}          % Automatically include bibliography, index, etc. in ToC
+\usepackage{sectsty}            % Change font style of section headings (\sectionfont, \subsectionfont)
+\usepackage{chngcntr}           % Modify or reset counters (e.g., figure/table numbering per chapter)
+\usepackage{etoolbox}           % Provides programming-like tools for advanced macros and conditions
+
+% --- Figures, tables, and lists ---
+\usepackage{graphicx}           % Insert and scale images
+\usepackage{subfig}             % Create subfigures (a), (b), (c) under one main figure caption
+\usepackage{array}              % Extended column types and formatting options for tables
+\usepackage{longtable}          % Create tables that span multiple pages
+\usepackage{booktabs}           % Professional-quality table lines (\toprule, \midrule, \bottomrule)
+\usepackage{tabularx}           % Tables with auto-stretch columns for flexible widths
+\usepackage{listings}           % Display and format source code with syntax highlighting
+\usepackage{parskip}            % Remove paragraph indentation and manage spacing between paragraphs
+\usepackage{afterpage}          % Defer command execution until the current page is finished
+\usepackage{xcolor, colortbl}   % Define colors and apply them to text, tables, or cells
+\usepackage{relsize}            % Adjust font size relatively (\smaller, \larger, \textsmaller, etc.)
+\usepackage{caption}            % Customize captions for figures and tables
+\usepackage{multirow}           % Create table cells that span multiple rows
+\usepackage{float}              % Improved interface for floating objects (figures, tables)
+
+\usepackage{xltabular}           % Combine features of longtable and tabularx for better table handling
+\keepXColumns
+
+% --- Hyperlinks & citation ---
+\usepackage{csquotes}                                               % Context-sensitive quotation facilities
+\usepackage{hyperref}                                               % Create hyperlinks in the document (table of contents, references, URLs)
+\usepackage[style=apa,backend=biber]{biblatex}                      % Manage references and citations using APA style via Biber backend
+\DeclareLanguageMapping{bahasa}{lang/bahasa-apa}                    % Custom localization file
+\addbibresource{bib/references.bib}                                 % Your reference file
+
+% --- Misc utilities ---
+\usepackage{scrwfile}           % Safe file-writing utilities (used internally by KOMA-script or for custom outputs)

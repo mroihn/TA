@@ -1,0 +1,71 @@
+% ------------------------------------------------------------------- %
+%  INTRODUCTION CHAPTER
+%  AUTHOR: Raden Francisco Trianto Bratadiningrat (@NoHaitch)
+%  DATE: 2025-10-28
+% ------------------------------------------------------------------- %
+
+% ----- JUDUL BAB -----
+\chapter{Pendahuluan}
+
+
+% ----- LATAR BELAKANG -----
+\section{Latar Belakang}
+
+Sistem publikasi ilmiah modern sangat bergantung pada mekanisme \textit{peer review} sebagai dasar untuk menjaga kredibilitas dan kualitas pengetahuan ilmiah (\cite{Masic2016ZPeerReview}). 
+\textit{Peer review} adalah proses penilaian manuskrip atau karya ilmiah yang akan dipublikasikan oleh para ahli sejawat di bidang terkait (\cite{drozdz2024peerreviewprocess}). 
+Proses ini telah menjadi standar universal yang dipakai oleh sebagian besar jurnal ilmiah untuk menjaga mutu dan kredibilitas karya yang dipublikasikan (\cite{aliwatson2016peerreviewpublication}).
+
+\textit{Peer review} adalah jantung dari proses-proses tidak hanya pada jurnal medis, tetapi juga di seluruh ilmu pengetahuan.
+Mekanisme ini digunakan untuk mengalokasikan dana hibah, menerbitkan makalah, mempromosikan akademisi, dan bahkan memenangkan hadiah Nobel (\cite{Smith2006PeerReview}).
+Namun, \textit{peer review} memiliki kekurangannya, seperti anonimitas, bias, transparansi, penyalahgunaan serta berbagai masalah lainnya (\cite{elguebaly2023peerreviewissues, tennant2020peerreviewissues, velterop2015peerreviewissues}): 
+
+Dalam mengatasi kekurangannya, munculah model alternatif untuk \textit{peer review} guna mengatasi kelemahan-kelemahan tersebut, seperti \textit{Closed} dan \textit{Open Peer Review}, \textit{Single-Blind}, \textit{Double-Blind}, Hybrid dan berbagai model lainnya (\cite{drozdz2024peerreviewprocess}).
+Namun, alternatif tersebut masih menghadapi tantangan dalam mencapai transparansi penuh, desentralisasi sistem, dan auditabilitas yang kuat, terutama dalam lingkungan publikasi ilmiah tradisional yang masih tersentralisasi (\cite{ware2008peer}).
+Untuk mengatasi keterbatasan ini, teknologi Distributed Ledger Technology (DLT) menjadi pendekatan inovatif dengan sifat-sifat inheren seperti desentralisasi, immutabilitas catatan, dan transparansi transaksi (\cite{Morales2024BlockchainPeerReview}).   
+
+
+% ----- RUMUSAN MASALAH -----
+\section{Rumusan Masalah}
+
+Studi ini bertujuan untuk merancang dan mengembangkan \textit{proof of concept} sistem publikasi ilmiah berbasis DLT dengan anonimitas \textit{double-blind}.
+Sistem yang dikembangkan didasarkan pada model Open Peer Review(OPR), yang diadaptasikan dengan konsep anonimitas \textit{double-blind}. Pengembangan sistem bertujuan mendorong desentralisasi, transparansi, dan openness serta mengurangi bias dan penyalahgunaan.
+
+% ----- KEBERHASILAN -----
+\section{Tujuan dan Ukuran Keberhasilan Pencapaian}
+
+Tujuan utama dari penelitian ini adalah merancang dan mengembangkan \textit{proof of concept} sistem publikasi ilmiah berbasis Distributed Ledger Technology (DLT) dengan mekanisme \textit{double-blind peer review}.
+
+Secara khusus, tujuan penelitian ini meliputi:
+\begin{enumerate}
+    \item Mengembangkan sistem desentralisasi untuk proses peer review yang meningkatkan transparansi dan auditabilitas tanpa mengorbankan anonimitas penulis dan penelaah.
+    \item Mengadaptasi dan mengimplementasikan model Open Peer Review (OPR) dengan anonimitas \textit{double-blind} dalam sistem yang didasarkan pada teknologi DLT.
+    \item Menyediakan mekanisme smart contract untuk otomasi dan keamanan proses peer review di sistem terdistribusi.
+    \item Melakukan pengujian \textit{proof of concept} menggunakan metode unit test dan simulasi alur proses peer review untuk memastikan fungsionalitas, keamanan, dan efektivitas sistem.
+    \item Mengevaluasi kemampuan sistem dalam mengurangi bias, meningkatkan keadilan, dan menjaga integritas publikasi ilmiah melalui desentralisasi.
+\end{enumerate}
+
+
+% ----- BATASAN MASALAH -----
+\section{Batasan Masalah}
+
+Penelitian ini memiliki batasan sebagai berikut:
+\begin{enumerate}
+    \item Proses publikasi yang dibahas dalam penelitian ini terbatas pada tahapan mulai dari pengumpulan naskah ilmiah hingga persetujuan publikasi oleh editor. 
+    \item Sistem insentif pada platform hanya dikaitkan dengan aktivitas dan kualitas penelaahan serta reputasi pengguna; aspek insentif lain seperti pendanaan penelitian atau penghargaan di luar proses publikasi tidak menjadi cakupan studi.
+    \item Perancangan sistem tidak membahas detail spesifik seperti kriteria pemilihan penelaah, mekanisme kontrol waktu, atau aturan editorial spesifik yang berada di luar proses peer review inti; fokus studi hanya pada fungsi dasar sistem yang terintegrasi dalam model double-blind peer review berbasis DLT.
+    \item Skema anonimitas dalam sistem memiliki keterbatasan, termasuk potensi deanonimisasi melalui konten naskah, meta-data, atau pola hubungan sosial antara penulis dan penelaah (\cite{Wisniewski2022Anonymity}).
+    \item Studi ini hanya mengembangkan \textit{proof of concept} dan prototipe pada tingkat simulasi, sehingga tidak membahas integrasi atau penerapan pada platform publikasi jurnal sesungguhnya ataupun skala produksi.
+\end{enumerate}
+
+% ----- METODOLOGI -----
+\section{Metodologi}
+
+Metodologi yang akan digunakan pada studi ini adalah metodologi berbasis model Waterfall (\cite{Ruparelia2010SDLCModels}):
+
+\begin{enumerate}
+    \item Pendefinisian spesifikasi dan kebutuhan sistem
+    \item Analisis persoalan
+    \item Perancangan sistem
+    \item Pengembangan sistem
+    \item Pengujian sistem
+\end{enumerate}

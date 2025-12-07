@@ -1,0 +1,209 @@
+% ------------------------------------------------------------------- %
+%  FORMATTING CONFIGURATIONS
+%  ~ Customize layout, sectioning, TOC, numbering, and other styles
+%  AUTHOR: Raden Francisco Trianto Bratadiningrat @NoHaitch
+%  DATE: 2025-11-11
+% ------------------------------------------------------------------- %
+
+% --- Paper size (A4) ---
+\special{papersize=210mm,297mm}
+
+% --- Line spacing ---
+\renewcommand{\baselinestretch}{1.5}    % Set global line spacing to 1.5
+
+% --- Section ---
+\setcounter{secnumdepth}{4}             % Allow numbering up to 4th level (subsubsubsection)
+
+% --- Custom 4th-level section ---
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}                              % Define new command for 4th-level headings
+\titleformat{\subsubsubsection}{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}  % Format font/size/numbering
+\titlespacing*{\subsubsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}     % Control spacing above/below heading
+
+% --- Chapter title formatting ---
+\renewcommand{\thechapter}{\Roman{chapter}}               % Use Roman numerals for chapter numbering
+\chapterfont{\centering \large}                           % Center and enlarge chapter titles
+\titleformat{\chapter}[display]                           % Customize chapter title layout
+  {\large\centering\bfseries}                             % - Large, bold, centered font
+  {\MakeUppercase{\chaptertitlename}\ \thechapter}        % - Prefix “BAB” and chapter number (uppercase)
+  {0pt}                                                   % - No extra separation between label and title
+  {\large\bfseries\MakeUppercase}                         % - Convert title text to uppercase and bold
+
+\titlespacing*{\chapter}
+  {0pt}                         % left margin
+  {12pt plus 2pt minus 1pt}     % space before section
+  {12pt plus 2pt minus 1pt}     % space after section
+
+% --- Section/subsection font sizes ---
+\sectionfont{\normalsize}                                 % Normal-size section titles
+\subsectionfont{\normalsize}
+\subsubsectionfont{\normalsize}
+
+% --- Section spacing and line spacing ---
+\titlespacing*{\section}
+  {0pt}                         % left margin
+  {12pt plus 2pt minus 1pt}     % space before section
+  {3pt plus 1pt minus 1pt}      % space after section
+
+\titleformat{\section}
+  {\normalfont\normalsize\bfseries\setstretch{1.5}}   % font + 1.5 line spacing
+  {\thesection.}                                      % numbering
+  {1em}                                               % spacing between number and title
+  {}                                                  % code before the title
+
+% --- Adjust dot leader spacing ---
+\makeatletter
+\renewcommand{\@dotsep}{1}            % Closer dot spacing in ToC
+\makeatother
+
+% --- ToC entry format for chapters ---
+\titlecontents{chapter}
+[0pt]                                                         % No indentation
+{\bfseries}                                                   % Bold chapter entries
+{\makebox[3.8em][l]{\MakeUppercase{Bab}\ \thecontentslabel}}  % Prefix in a fixed-width "tab" box
+{}                                                            % No prefix text
+{\mdseries\dotfill\bfseries\contentspage}                     % Dotted leaders + bold page numbers
+
+% --- ToC entry format for figures ---
+\titlecontents{figure}
+[0pt]{}
+{Gambar~\thecontentslabel.\quad}
+{}
+{\mdseries\dotfill\bfseries\contentspage}
+
+% --- ToC entry format for tables ---
+\titlecontents{table}
+[0pt]{}
+{Tabel~\thecontentslabel.\quad}
+{}
+{\mdseries\dotfill\bfseries\contentspage}
+
+% --- Single-spaced list entries only ---
+\newcommand{\SingleSpacingEntriesOnly}[1]{%
+  {%
+    \begingroup #1\endgroup       % Print title normally
+    \begingroup
+      \setstretch{1}              % Single spacing
+      \setlength{\parskip}{0pt}
+      \normalsize
+      \@starttoc{\@nameuse{ext@#1}}%
+    \endgroup
+  }%
+}
+
+% --- Patch the standard list commands ---
+\makeatletter
+\renewcommand{\listoftables}{
+  \chapter*{\listtablename}
+  % \addcontentsline{toc}{chapter}{\listtablename}
+  \begingroup
+    \setstretch{1.5}
+    \setlength{\parskip}{0pt}
+    \normalsize
+    \@starttoc{lot}
+  \endgroup
+}
+
+\renewcommand{\listoffigures}{
+  \chapter*{\listfigurename}
+  % \addcontentsline{toc}{chapter}{\listfigurename}
+  \begingroup
+    \setstretch{1}
+    \setlength{\parskip}{0pt}
+    \normalsize
+    \@starttoc{lof}
+  \endgroup
+}
+
+\renewcommand{\tableofcontents}{
+  \chapter*{\contentsname}
+  % \addcontentsline{toc}{chapter}{\contentsname}
+  \begingroup
+    \setstretch{1.5}
+    \setlength{\parskip}{0pt}
+    \normalsize
+    \@starttoc{toc}
+  \endgroup
+}
+
+\newcommand{\listofappendices}{
+  \chapter*{\contentsname}
+  % \addcontentsline{toc}{chapter}{\contentsname}
+  \begingroup
+    \setstretch{1.5}
+    \setlength{\parskip}{0pt}
+    \normalsize
+    \@starttoc{toc}
+  \endgroup
+}
+\makeatother
+
+% --- Custom appendix list title ---
+\newcommand*{\lopname}{Daftar Lampiran}               % Define name for appendix list
+\TOCclone[\lopname]{toc}{atoc}                        % Create clone ToC for appendices
+\addtocontents{atoc}{\protect\value{tocdepth}=-1}     % Hide deeper levels in appendix list
+
+% --- Redefine list of appendices command ---
+\renewcommand{\listofappendices}{                   
+  \phantomsection
+  \listofatoc
+}
+
+% --- Save and restore ToC depth for appendices ---
+\newcommand*\savedtocdepth{}      
+\AtBeginDocument{
+  \edef\savedtocdepth{\the\value{tocdepth}}
+}
+
+% --- Appendix formatting setup ---
+\let\originalappendix\appendix
+\renewcommand\appendix{
+  \originalappendix
+  \cleardoublepage
+  \addtocontents{toc}{\protect\value{tocdepth}=-1}
+  \addtocontents{atoc}{\protect\value{tocdepth}=\savedtocdepth}
+
+  % Appendix ToC entry format
+  \titlecontents{chapter}
+    [0pt]
+    {\bfseries}
+    {Lampiran \thecontentslabel.\quad}
+    {}
+    {\dotfill\contentspage}
+
+  % Appendix title format
+  \titleformat{\chapter}[block]
+    {\Large\bfseries}
+    {\chaptertitlename\ \thechapter.\quad}
+    {0pt}
+    {\Large\bfseries}
+}
+
+% --- Figure & table numbering per chapter ---
+\counterwithin{figure}{chapter}
+\counterwithin{table}{chapter}
+
+% --- Blank page command ---
+\newcommand*{\blankpage}{\afterpage{\null\newpage}}       % Insert a blank page 
+
+% --- Autoref translation ---
+\renewcommand*{\equationautorefname}{Persamaan}
+\renewcommand*{\figureautorefname}{Gambar}
+\renewcommand*{\tableautorefname}{Tabel}
+\renewcommand*{\chapterautorefname}{Bab}
+\renewcommand*{\sectionautorefname}{Subbab}
+\renewcommand*{\subsectionautorefname}{Subsubbab}
+\renewcommand*{\subsubsectionautorefname}{Subsubsubbab}
+\renewcommand*{\appendixautorefname}{Lampiran}
+
+% --- Ignore underfull box warnings ---
+\hbadness=99999
+
+% --- Adjust caption positions ---
+% \captionsetup[table]{position=above}      % Table captions above
+\captionsetup[image]{position=below}      % Image captions below
+
+% --- Default table formatting macro ---
+\newcommand{\DefaultTableFormatting}{
+    \renewcommand{\arraystretch}{1.5}     % Row height
+    \setlength{\tabcolsep}{10pt}          % Column padding
+}
