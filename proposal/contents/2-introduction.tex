@@ -1,71 +1,55 @@
-% ------------------------------------------------------------------- %
-%  INTRODUCTION CHAPTER
-%  AUTHOR: Raden Francisco Trianto Bratadiningrat (@NoHaitch)
-%  DATE: 2025-10-28
-% ------------------------------------------------------------------- %
-
 % ----- JUDUL BAB -----
 \chapter{Pendahuluan}
 
-
-% ----- LATAR BELAKANG -----
 \section{Latar Belakang}
 
-Sistem publikasi ilmiah modern sangat bergantung pada mekanisme \textit{peer review} sebagai dasar untuk menjaga kredibilitas dan kualitas pengetahuan ilmiah (\cite{Masic2016ZPeerReview}). 
-\textit{Peer review} adalah proses penilaian manuskrip atau karya ilmiah yang akan dipublikasikan oleh para ahli sejawat di bidang terkait (\cite{drozdz2024peerreviewprocess}). 
-Proses ini telah menjadi standar universal yang dipakai oleh sebagian besar jurnal ilmiah untuk menjaga mutu dan kredibilitas karya yang dipublikasikan (\cite{aliwatson2016peerreviewpublication}).
+Dalam beberapa tahun terakhir, sistem peer review telah menjadi komponen krusial dalam menjaga integritas dunia akademis dan ilmiah. Peer review adalah proses validasi di mana karya ilmiah dievaluasi oleh para ahli di bidang yang sama sebelum diterbitkan. Namun, ekosistem ini kini menghadapi krisis keberlanjutan karena laju pertumbuhan artikel yang dikirimkan tumbuh jauh lebih cepat daripada ketersediaan reviewer yang bersedia \cite{horta2024crisis}.
 
-\textit{Peer review} adalah jantung dari proses-proses tidak hanya pada jurnal medis, tetapi juga di seluruh ilmu pengetahuan.
-Mekanisme ini digunakan untuk mengalokasikan dana hibah, menerbitkan makalah, mempromosikan akademisi, dan bahkan memenangkan hadiah Nobel (\cite{Smith2006PeerReview}).
-Namun, \textit{peer review} memiliki kekurangannya, seperti anonimitas, bias, transparansi, penyalahgunaan serta berbagai masalah lainnya (\cite{elguebaly2023peerreviewissues, tennant2020peerreviewissues, velterop2015peerreviewissues}): 
+Menurut Horta et al. \cite{horta2024crisis}, dunia akademik saat ini berada di era "publish or perish", di mana terdapat dorongan eksternal yang kuat untuk mempublikasikan karya, namun hampir tidak ada insentif yang setara untuk melakukan review. Ketimpangan ini berhubungan erat dengan psikologis motivasi para reviewer. Secara historis, reviewer bekerja karena motivasi intrinsik (moral, tanggung jawab ilmiah, dan komitmen komunitas) \cite{squazzoni2013incentive}. Namun, upaya memberikan insentif material secara gegabah justru berpotensi memicu dampak negatif yang dikenal sebagai \textit{Crowding Effect}, di mana insentif eksternal dapat mengikis motivasi intrinsik seseorang \cite{squazzoni2013incentive}.
 
-Dalam mengatasi kekurangannya, munculah model alternatif untuk \textit{peer review} guna mengatasi kelemahan-kelemahan tersebut, seperti \textit{Closed} dan \textit{Open Peer Review}, \textit{Single-Blind}, \textit{Double-Blind}, Hybrid dan berbagai model lainnya (\cite{drozdz2024peerreviewprocess}).
-Namun, alternatif tersebut masih menghadapi tantangan dalam mencapai transparansi penuh, desentralisasi sistem, dan auditabilitas yang kuat, terutama dalam lingkungan publikasi ilmiah tradisional yang masih tersentralisasi (\cite{ware2008peer}).
-Untuk mengatasi keterbatasan ini, teknologi Distributed Ledger Technology (DLT) menjadi pendekatan inovatif dengan sifat-sifat inheren seperti desentralisasi, immutabilitas catatan, dan transparansi transaksi (\cite{Morales2024BlockchainPeerReview}).   
+Untuk mengatasi krisis ini, diperlukan pendekatan teknologi baru yang mampu mengelola insentif secara transparan dan otomatis. Integrasi teknologi \textit{blockchain}, \textit{smart contract}, dan \textit{crypto wallet} menawarkan solusi potensial untuk menciptakan sistem insentif yang terdesentralisasi dan adil \cite{han2022blockchainincentivemechanisms}. Namun, tantangan utamanya bukan sekadar mendigitalkan pembayaran, melainkan bagaimana merancang arsitektur sistem yang tidak hanya memberikan imbalan moneter, tetapi juga mengakomodasi insentif non-moneter (reputasi). 
 
+Berdasarkan studi pada platform komunitas \textit{blockchain} seperti Steemit, sistem insentif yang berkelanjutan harus bersifat multi-dimensi, yakni mampu menggabungkan aspek ekonomi, sosial, dan kepemilikan aset dengan seimbang \cite{liu2022steemit}. Oleh karena itu, diperlukan sebuah perancangan sistem yang mengintegrasikan mekanisme ekonomi sirkular dengan validasi kualitas terpusat ke dalam infrastruktur \textit{Open Journal Systems} (OJS), guna menciptakan ekosistem insentif yang otonom tanpa merusak integritas akademik.
 
-% ----- RUMUSAN MASALAH -----
 \section{Rumusan Masalah}
 
-Studi ini bertujuan untuk merancang dan mengembangkan \textit{proof of concept} sistem publikasi ilmiah berbasis DLT dengan anonimitas \textit{double-blind}.
-Sistem yang dikembangkan didasarkan pada model Open Peer Review(OPR), yang diadaptasikan dengan konsep anonimitas \textit{double-blind}. Pengembangan sistem bertujuan mendorong desentralisasi, transparansi, dan openness serta mengurangi bias dan penyalahgunaan.
+Berdasarkan latar belakang di atas, rumusan masalah dalam penelitian ini adalah sebagai berikut:
+\begin{enumerate}
+    \item Bagaimana merancang mekanisme distribusi insentif hibrida pada \textit{Smart Contract} yang mampu menggabungkan sumber pendanaan dinamis untuk menjamin keberlanjutan dana insentif di OJS?
+    \item Bagaimana merancang arsitektur integrasi sistem yang menghubungkan validasi kualitas tertutup oleh Editor di OJS (\textit{off-chain}) dengan eksekusi pembayaran otomatis dan manajemen aset reputasi pada \textit{crypto wallet} (\textit{on-chain})?
+\end{enumerate}
 
-% ----- KEBERHASILAN -----
 \section{Tujuan dan Ukuran Keberhasilan Pencapaian}
 
-Tujuan utama dari penelitian ini adalah merancang dan mengembangkan \textit{proof of concept} sistem publikasi ilmiah berbasis Distributed Ledger Technology (DLT) dengan mekanisme \textit{double-blind peer review}.
+Penelitian ini bertujuan untuk menjawab masalah yang dirumuskan di atas. Rincian tujuan beserta ukuran keberhasilannya adalah sebagai berikut:
 
-Secara khusus, tujuan penelitian ini meliputi:
 \begin{enumerate}
-    \item Mengembangkan sistem desentralisasi untuk proses peer review yang meningkatkan transparansi dan auditabilitas tanpa mengorbankan anonimitas penulis dan penelaah.
-    \item Mengadaptasi dan mengimplementasikan model Open Peer Review (OPR) dengan anonimitas \textit{double-blind} dalam sistem yang didasarkan pada teknologi DLT.
-    \item Menyediakan mekanisme smart contract untuk otomasi dan keamanan proses peer review di sistem terdistribusi.
-    \item Melakukan pengujian \textit{proof of concept} menggunakan metode unit test dan simulasi alur proses peer review untuk memastikan fungsionalitas, keamanan, dan efektivitas sistem.
-    \item Mengevaluasi kemampuan sistem dalam mengurangi bias, meningkatkan keadilan, dan menjaga integritas publikasi ilmiah melalui desentralisasi.
+    \item Mengimplementasikan algoritma insentif pada \textit{Smart Contract} yang secara otomatis mengelola alokasi dana dari biaya penulis dan subsidi sistem berdasarkan parameter validasi kualitas. Keberhasilan diukur dengan validasi fungsional logika kontrak pintar pada jaringan \textit{testnet}.
+    \item Membangun prototipe modul integrasi pada OJS yang menghubungkan pemicu dari Editor dengan dompet kripto standar (\textit{MetaMask}) untuk pengelolaan aset likuid (token ERC-20) dan aset reputasi (\textit{Soulbound Token}). Keberhasilan diukur dengan demonstrasi alur kerja sistem dari submisi hingga pencairan insentif di sisi pengguna.
 \end{enumerate}
 
-
-% ----- BATASAN MASALAH -----
 \section{Batasan Masalah}
 
-Penelitian ini memiliki batasan sebagai berikut:
+Penelitian ini memiliki batasan kajian sebagai berikut:
 \begin{enumerate}
-    \item Proses publikasi yang dibahas dalam penelitian ini terbatas pada tahapan mulai dari pengumpulan naskah ilmiah hingga persetujuan publikasi oleh editor. 
-    \item Sistem insentif pada platform hanya dikaitkan dengan aktivitas dan kualitas penelaahan serta reputasi pengguna; aspek insentif lain seperti pendanaan penelitian atau penghargaan di luar proses publikasi tidak menjadi cakupan studi.
-    \item Perancangan sistem tidak membahas detail spesifik seperti kriteria pemilihan penelaah, mekanisme kontrol waktu, atau aturan editorial spesifik yang berada di luar proses peer review inti; fokus studi hanya pada fungsi dasar sistem yang terintegrasi dalam model double-blind peer review berbasis DLT.
-    \item Skema anonimitas dalam sistem memiliki keterbatasan, termasuk potensi deanonimisasi melalui konten naskah, meta-data, atau pola hubungan sosial antara penulis dan penelaah (\cite{Wisniewski2022Anonymity}).
-    \item Studi ini hanya mengembangkan \textit{proof of concept} dan prototipe pada tingkat simulasi, sehingga tidak membahas integrasi atau penerapan pada platform publikasi jurnal sesungguhnya ataupun skala produksi.
+    \item Penelitian berfokus pada perancangan arsitektur perangkat lunak dan validasi fungsional prototipe sistem (logika \textit{smart contract} dan integrasi \textit{web3} pada OJS).
+    \item Batasan kajian tidak mencakup validasi empiris atau studi perilaku jangka panjang untuk mengukur dampak psikologis (\textit{Crowding Effect}) dari model yang diusulkan terhadap populasi reviewer nyata.
+    \item Implementasi \textit{blockchain} dilakukan pada lingkungan jaringan privat (seperti Hyperledger Besu atau simulasi lokal) dan tidak melibatkan transaksi aset kripto bernilai riil (\textit{Mainnet}).
+    \item Antarmuka dompet digital menggunakan penyedia layanan standar industri (seperti MetaMask), bukan pengembangan aplikasi \textit{wallet} baru dari awal.
 \end{enumerate}
 
-% ----- METODOLOGI -----
 \section{Metodologi}
-
-Metodologi yang akan digunakan pada studi ini adalah metodologi berbasis model Waterfall (\cite{Ruparelia2010SDLCModels}):
-
+Metodologi penelitian yang digunakan mengadopsi prinsip \textit{Design Science Research} (DSR), yang berfokus pada perancangan, implementasi, dan validasi artefak sistem. Sesuai dengan tujuan penelitian, tahapan tugas akhir ini adalah sebagai berikut:
 \begin{enumerate}
-    \item Pendefinisian spesifikasi dan kebutuhan sistem
-    \item Analisis persoalan
-    \item Perancangan sistem
-    \item Pengembangan sistem
-    \item Pengujian sistem
+    \item \textbf{Perancangan Mekanisme Insentif:}
+    Tahap ini berfokus untuk menjawab rumusan masalah pertama. Kegiatan utamanya adalah merancang algoritma distribusi dana yang menggabungkan variabel biaya penulis dan inflasi sistem. \textit{Outcome} dari tahap ini adalah spesifikasi matematis dan logika bisnis \textit{smart contract}.
+    
+    \item \textbf{Perancangan Arsitektur Sistem Terintegrasi:}
+    Tahap ini berfokus untuk menjawab rumusan masalah kedua. Kegiatan utamanya adalah merancang arsitektur teknis yang menghubungkan kode sumber OJS eksisting dengan jaringan \textit{blockchain}, serta pemetaan fungsi manajemen aset hibrida pada \textit{wallet}.
+    
+    \item \textbf{Implementasi Prototipe:} 
+    Pada tahap ini, artefak yang dirancang pada tahap sebelumnya akan diimplementasikan ke dalam kode program. Kegiatan utamanya meliputi pengembangan \textit{Smart Contract} (Solidity) dan pengembangan modul integrasi pada antarmuka OJS.
+    
+    \item \textbf{Validasi Fungsional dan Demonstrasi:}
+    Tahap ini berfokus untuk memvalidasi pencapaian tujuan penelitian. Validasi dilakukan melalui pengujian \textit{black-box} pada fungsi \textit{smart contract} dan demonstrasi skenario penggunaan (\textit{use case}) untuk membuktikan bahwa sistem dapat mendistribusikan insentif moneter dan reputasi secara akurat sesuai pemicu dari Editor.
 \end{enumerate}

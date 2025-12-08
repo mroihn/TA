@@ -1,23 +1,24 @@
-% ------------------------------------------------------------------- %
-%  ANALYSIS CHAPTER
-%  AUTHOR: Raden Francisco Trianto Bratadiningrat (@NoHaitch)
-%  DATE: 2025-10-28
-% ------------------------------------------------------------------- %
-
 % ----- JUDUL BAB -----
-\chapter{Analisis Masalah dan Rancangan Solusi}
+\chapter{Analisis dan Perancangan}
 
-Tujuan utama penulisan bab ini adalah untuk menguraikan rencana penyelesaian masalah tugas akhir I.. Bab ini mencakup antara lain: 
+\section{Analisis Masalah}
 
-\begin{enumerate}
-    \item Deskripsi dan analisis persoalan yang terkait dengan Rumusan Masalah, misalnya menjelaskan secara detail latar belakang dan masalah yang menjadi dasar munculnya topik, menunjukkan gap/celah antara kondisi saat ini dengan kondisi yang diharapkan, dan kaitan antara sistem/aplikasi yang dikembangkan dengan sistem/aplikasi lain yang terkait.
-    \item Analisis solusi yang terdiri dari pilihan alternatif solusi yang dapat digunakan untuk setiap permasalahan berdasarkan hasil studi literatur atau survei, pemilihan solusi beserta justifikasinya.
-    \item Deskripsi umum solusi yang dipilih, mencakup:
-        \begin{enumerate} 
-            \renewcommand{\labelenumii}{\alph{enumii}.}
-            \item Modul/subsistem/komponen yang akan dikembangkan untuk menyelesaikan masalah, berikut penjelasannya.
-            \item Alur umum algoritma atau langkah-langkah pengembangan sistem dan penjelasannya.
-            \item Penggunaan kakas yang diperlukan
-        \end{enumerate}
-    Dianjurkan untuk menggunakan diagram sebagai pendukung penjelasan bagian ini.
-\end{enumerate}
+Sistem insentif dalam publikasi ilmiah saat ini menghadapi tantangan fundamental yang tidak dapat diselesaikan hanya dengan mendigitalkan proses pembayaran konvensional. Masalah utama berakar pada ketidakselarasan (\textit{misalignment}) antara motivasi ekonomi dan integritas akademik. Model insentif tradisional yang bergantung sepenuhnya pada kesukarelaan (\textit{volunteerism}) terbukti gagal membendung laju pertumbuhan naskah yang eksponensial, menyebabkan kelelahan (\textit{review fatigue}) dan penurunan kualitas telaah. Di sisi lain, upaya memberikan insentif finansial secara langsung sering kali terbentur pada risiko komodifikasi sains, di mana \textit{reviewer} bekerja mengejar kuantitas bayaran daripada kualitas masukan, sebuah fenomena yang dikenal sebagai \textit{Crowding Out Effect}.
+
+Pendekatan berbasis \textit{blockchain} yang ada saat ini, seperti Steemit atau PubChain, menawarkan solusi desentralisasi namun membawa masalah baru ketika diterapkan dalam konteks akademik yang ketat. Model validasi berbasis \textit{voting} massa (\textit{crowd-voting}) yang diadopsi oleh platform tersebut sangat rentan terhadap manipulasi dan bias popularitas, serta bertentangan dengan prinsip \textit{double-blind review} yang mensyaratkan kerahasiaan dan kepakaran spesifik. Dalam OJS, validasi kualitas tidak bisa diserahkan kepada algoritma konsensus terbuka, melainkan harus tetap berada di bawah otorisasi Editor sebagai penanggung jawab mutu ilmiah.
+
+Selain masalah validasi, keberlanjutan pendanaan (\textit{sustainability}) menjadi titik kegagalan fatal pada banyak model insentif sebelumnya. Sistem seperti Eureka yang bergantung sepenuhnya pada biaya penulis (\textit{submission fee}) berisiko mengalami \textit{deadlock} atau masalah \textit{Cold Start} ketika jumlah submisi rendah, menyebabkan ketiadaan dana untuk membayar \textit{reviewer}. Sebaliknya, model yang hanya mengandalkan inflasi token (\textit{minting}) tanpa adanya pemasukan nilai riil berisiko menciptakan token yang tidak bernilai (\textit{hyperinflation}). Oleh karena itu, diperlukan sebuah mekanisme ekonomi yang mampu menyeimbangkan pemasukan eksternal (fee) dengan subsidi sistem (\textit{minting}) untuk menjamin likuiditas insentif bagi \textit{reviewer} tanpa membebani penulis dengan biaya yang eksesif.
+
+Terakhir, fragmentasi dalam pengelolaan aset digital menjadi hambatan teknis bagi adopsi di kalangan akademisi. \textit{Reviewer} saat ini tidak memiliki sarana terpadu untuk mengelola dua jenis hasil kerja mereka: imbalan finansial (aset likuid) dan reputasi akademik (aset non-likuid). Ketiadaan pemisahan yang tegas dalam arsitektur dompet digital (\textit{wallet}) berisiko mencampuradukkan motivasi, di mana reputasi bisa diperjualbelikan layaknya komoditas, yang pada akhirnya merusak kredibilitas sistem \textit{peer review} itu sendiri.
+
+\section{Rancangan Solusi}
+
+Berdasarkan analisis masalah di atas, penelitian ini mengusulkan rancangan solusi berupa Arsitektur Sistem Insentif Hibrida Terintegrasi yang dibangun di atas platform \textit{Open Journal Systems} (OJS). Solusi ini dirancang untuk menutup kelemahan masing-masing model terdahulu dengan menggabungkan mekanisme validasi terpusat (Editor) dengan distribusi insentif terdesentralisasi (\textit{Smart Contract}).
+
+Untuk mengatasi masalah validasi dan integritas, sistem ini tidak mengadopsi mekanisme \textit{crowd-voting} maupun \textit{pure decentralized consensus}. Sebaliknya, solusi yang diajukan menempatkan Editor sebagai \textit{Oracle} Terpercaya dalam jaringan \textit{blockchain}. Dalam rancangan ini, \textit{Smart Contract} hanya akan mengeksekusi distribusi insentif setelah menerima sinyal validasi kualitas dari Editor. Pendekatan ini mempertahankan standar akademik \textit{double-blind review} sambil tetap memanfaatkan transparansi dan otomatisasi pembayaran yang ditawarkan oleh \textit{blockchain}.
+
+Dari sisi ekonomi dan keberlanjutan, rancangan solusi ini menerapkan Model Pendanaan Sirkular (\textit{Circular Economy}) yang menggabungkan dua sumber likuiditas. Pertama, mekanisme \textit{Inflationary Minting} diadopsi untuk mencetak token subsidi secara otomatis pada setiap periode, menjamin ketersediaan ``gaji dasar'' bagi \textit{reviewer} meskipun tidak ada pemasukan dari penulis. Kedua, mekanisme \textit{Submission Fee} tetap diterapkan sebagai filter kualitas (\textit{spam barrier}) dan sumber nilai riil, namun dengan nominal yang terjangkau karena adanya subsidi silang dari \textit{minting}. Dana ini dikelola dalam sebuah \textit{Reward Pool} otonom yang mendistribusikan insentif secara proporsional berdasarkan bobot kualitas yang diberikan Editor.
+
+Untuk aspek infrastruktur, penelitian ini memilih untuk tidak menggunakan \textit{Sidechain} publik maupun \textit{Mainnet} Ethereum secara langsung dikarenakan volatilitas biaya transaksi (\textit{gas fee}) yang tidak terprediksi dan risiko keamanan data pada jaringan publik. Sebagai gantinya, solusi dirancang menggunakan \textit{Consortium Blockchain} (seperti Hyperledger Besu) yang dikelola secara privat. Pendekatan ini memungkinkan transaksi insentif (\textit{minting} dan transfer) dilakukan dengan biaya nol (\textit{gas-free}) bagi pengguna akhir, serta menjamin privasi data \textit{reviewer} yang hanya dapat diakses oleh \textit{node-node} terotorisasi dalam jaringan kampus.
+
+Dalam hal pengelolaan aset, rancangan solusi memanfaatkan \textit{MetaMask} sebagai antarmuka dompet digital standar yang dihubungkan ke jaringan privat. Pengembangan difokuskan pada logika \textit{Smart Contract} untuk memisahkan saldo token ERC-20 (insentif finansial) dan SBT (reputasi akademik) di dalam dompet tersebut, serta integrasi fungsi pemanggilan kontrak (\textit{contract calls}) pada kode sumber OJS yang sudah ada. Secara teknis, SBT diimplementasikan menggunakan standar \textit{Non-Fungible Token} (NFT) tipe ERC-721 yang dimodifikasi dengan menonaktifkan fitur transfer, menjadikannya sertifikat digital permanen yang melekat pada identitas \textit{reviewer}. Fitur \textit{Held-Back Vault} juga ditanamkan dalam logika kontrak pintar sebagai mekanisme jaminan mutu, di mana sebagian dana penulis dikunci sementara waktu untuk memitigasi risiko kecurangan pasca-publikasi.
