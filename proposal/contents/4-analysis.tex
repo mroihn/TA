@@ -1,24 +1,95 @@
-% ----- JUDUL BAB -----
 \chapter{Analisis dan Perancangan}
 
 \section{Analisis Masalah}
 
-Sistem insentif dalam publikasi ilmiah saat ini menghadapi tantangan fundamental yang tidak dapat diselesaikan hanya dengan mendigitalkan proses pembayaran konvensional. Masalah utama berakar pada ketidakselarasan (\textit{misalignment}) antara motivasi ekonomi dan integritas akademik. Model insentif tradisional yang bergantung sepenuhnya pada kesukarelaan (\textit{volunteerism}) terbukti gagal membendung laju pertumbuhan naskah yang eksponensial, menyebabkan kelelahan (\textit{review fatigue}) dan penurunan kualitas telaah. Di sisi lain, upaya memberikan insentif finansial secara langsung sering kali terbentur pada risiko komodifikasi sains, di mana \textit{reviewer} bekerja mengejar kuantitas bayaran daripada kualitas masukan, sebuah fenomena yang dikenal sebagai \textit{Crowding Out Effect}.
+Berdasarkan kajian literatur, penerapan insentif blockchain pada ekosistem publikasi ilmiah menghadapi tiga tantangan fundamental yang saling berkaitan:
 
-Pendekatan berbasis \textit{blockchain} yang ada saat ini, seperti Steemit atau PubChain, menawarkan solusi desentralisasi namun membawa masalah baru ketika diterapkan dalam konteks akademik yang ketat. Model validasi berbasis \textit{voting} massa (\textit{crowd-voting}) yang diadopsi oleh platform tersebut sangat rentan terhadap manipulasi dan bias popularitas, serta bertentangan dengan prinsip \textit{double-blind review} yang mensyaratkan kerahasiaan dan kepakaran spesifik. Dalam OJS, validasi kualitas tidak bisa diserahkan kepada algoritma konsensus terbuka, melainkan harus tetap berada di bawah otorisasi Editor sebagai penanggung jawab mutu ilmiah.
+Pertama, terdapat ketidaksesuaian mekanisme validasi. Mayoritas model insentif terdesentralisasi saat ini mengandalkan \textit{crowd-voting} (suara terbanyak) untuk menentukan kualitas konten. Pendekatan ini tidak kompatibel dengan standar \textit{Open Journal System} (OJS) yang mewajibkan \textit{expert peer-review} tertutup (\textit{double-blind}) untuk menjaga objektifitas ilmiah. Ketiadaan mekanisme yang dapat menjembatani keputusan editorial tertutup (Off-chain) dengan eksekusi transparan di Blockchain (On-chain) menyebabkan sulitnya mengadopsi teknologi ini tanpa merombak total alur kerja akademik yang sudah mapan.
 
-Selain masalah validasi, keberlanjutan pendanaan (\textit{sustainability}) menjadi titik kegagalan fatal pada banyak model insentif sebelumnya. Sistem seperti Eureka yang bergantung sepenuhnya pada biaya penulis (\textit{submission fee}) berisiko mengalami \textit{deadlock} atau masalah \textit{Cold Start} ketika jumlah submisi rendah, menyebabkan ketiadaan dana untuk membayar \textit{reviewer}. Sebaliknya, model yang hanya mengandalkan inflasi token (\textit{minting}) tanpa adanya pemasukan nilai riil berisiko menciptakan token yang tidak bernilai (\textit{hyperinflation}). Oleh karena itu, diperlukan sebuah mekanisme ekonomi yang mampu menyeimbangkan pemasukan eksternal (fee) dengan subsidi sistem (\textit{minting}) untuk menjamin likuiditas insentif bagi \textit{reviewer} tanpa membebani penulis dengan biaya yang eksesif.
+Kedua, terjadi dilema keberlanjutan pendanaan. Model insentif yang bergantung sepenuhnya pada biaya penulis (\textit{Submission Fee}) menciptakan hambatan partisipasi (\textit{Barrier to Entry}) bagi peneliti dengan dana terbatas. Sebaliknya, model yang hanya mengandalkan pencetakan token baru (\textit{Inflationary Minting}) berisiko tinggi menciptakan aset tanpa nilai riil (\textit{hyperinflation}) jika tidak diimbangi oleh permintaan pasar. Diperlukan mekanisme hibrida yang mampu menyeimbangkan beban biaya penulis dengan subsidi sistem secara proporsional.
 
-Terakhir, fragmentasi dalam pengelolaan aset digital menjadi hambatan teknis bagi adopsi di kalangan akademisi. \textit{Reviewer} saat ini tidak memiliki sarana terpadu untuk mengelola dua jenis hasil kerja mereka: imbalan finansial (aset likuid) dan reputasi akademik (aset non-likuid). Ketiadaan pemisahan yang tegas dalam arsitektur dompet digital (\textit{wallet}) berisiko mencampuradukkan motivasi, di mana reputasi bisa diperjualbelikan layaknya komoditas, yang pada akhirnya merusak kredibilitas sistem \textit{peer review} itu sendiri.
-
+Ketiga, risiko jual beli nilai akademik(SBT) akibat ketiadaan pemisahan fungsi aset. Dalam sistem konvensional maupun kripto sederhana, insentif finansial dan reputasi seringkali direpresentasikan oleh aset yang sama (likuid). Hal ini berbahaya karena reputasi seorang penelaah berpotensi diperjualbelikan layaknya komoditas pasar, yang pada akhirnya mendegradasi motivasi intrinsik (\textit{moral obligation}) menjadi motivasi transaksional semata. Diperlukan arsitektur manajemen aset yang secara tegas memisahkan insentif menjadi dua entitas: aset likuid untuk kebutuhan ekonomi dan aset terikat (\textit{soulbound}) untuk identitas reputasi.
 \section{Rancangan Solusi}
 
-Berdasarkan analisis masalah di atas, penelitian ini mengusulkan rancangan solusi berupa Arsitektur Sistem Insentif Hibrida Terintegrasi yang dibangun di atas platform \textit{Open Journal Systems} (OJS). Solusi ini dirancang untuk menutup kelemahan masing-masing model terdahulu dengan menggabungkan mekanisme validasi terpusat (Editor) dengan distribusi insentif terdesentralisasi (\textit{Smart Contract}).
+Dari analisis masalah, diusulkan solusi mekanisme insentif hibrida dengan arsitektur interaksi sistem yang terdiri dari tiga komponen logika utama:
 
-Untuk mengatasi masalah validasi dan integritas, sistem ini tidak mengadopsi mekanisme \textit{crowd-voting} maupun \textit{pure decentralized consensus}. Sebaliknya, solusi yang diajukan menempatkan Editor sebagai \textit{Oracle} Terpercaya dalam jaringan \textit{blockchain}. Dalam rancangan ini, \textit{Smart Contract} hanya akan mengeksekusi distribusi insentif setelah menerima sinyal validasi kualitas dari Editor. Pendekatan ini mempertahankan standar akademik \textit{double-blind review} sambil tetap memanfaatkan transparansi dan otomatisasi pembayaran yang ditawarkan oleh \textit{blockchain}.
+\begin{enumerate}
+    \item \textbf{Formulasi Mekanisme Pendanaan (Funding Algorithm):} 
+    Sistem menggunakan model probabilistik untuk menentukan total insentif ($I_{total}$) berdasarkan Skor Kualitas ($Q$). Mekanisme ini menggabungkan dana riil dari penulis ($F_{base}$) dan subsidi inflasi terkontrol ($M_{subsidy}$).
+    
+    Total insentif diformulasikan sebagai fungsi dari Skor Kualitas ($Q$) sebagai berikut:
+    
+    \begin{equation}
+        I_{total}(Q) = 
+        \begin{cases} 
+        F_{base} + \underbrace{\left( k \cdot \frac{1}{V_{net}} \cdot (Q - T_{min}) \right)}_{M_{subsidy} \text{ (Komponen Minting)}} & \text{jika } Q > T_{min} \\
+        0 & \text{jika } Q \leq T_{min}
+        \end{cases}
+    \end{equation}
+    
+    Dimana $F_{base}$ adalah biaya dasar penulis, $k$ adalah konstanta subsidi, dan $T_{min}$ adalah ambang batas kualitas.
+    
+    Analisis Komponen Minting ($M_{subsidy}$):
+    Pencetakan token baru (\textit{Minting}) tidak dilakukan secara linier, melainkan diatur oleh algoritma dinamis dengan kondisi ketat untuk mencegah hiperinflasi:
+    \begin{itemize}
+        \item Kondisi Kelayakan ($Q > T_{min}$): Minting bersifat \textit{performance-based}. Sistem tidak akan mencetak token untuk ulasan di bawah standar kualitas, sehingga inflasi hanya terjadi untuk membayar "nilai tambah" (\textit{added value}).
+        \item Elastisitas Suplai ($\frac{1}{V_{net}}$): Variabel $V_{net}$ didefinisikan sebagai Volume Submisi Jaringan per Epoch (rata-rata aktivitas dalam periode waktu tertentu, misal 30 hari), bukan total akumulatif sejak awal sistem. 
+        
+        % Mekanisme ini bertindak sebagai faktor deflasi dinamis yang responsif:
+        % \begin{itemize}
+        %     \item Saat aktivitas jaringan tinggi ($V_{net}$ besar), subsidi per artikel mengecil untuk mencegah banjir pasokan token (\textit{hyperinflation}).
+        %     \item Definisi berbasis \textit{epoch} mencegah nilai pembagi membesar tanpa batas seiring waktu, yang dapat menyebabkan subsidi mendekati nol ($0$) di masa depan. Hal ini menjamin insentif tetap relevan bagi partisipan jangka panjang.
+        % \end{itemize}
+    \end{itemize}
 
-Dari sisi ekonomi dan keberlanjutan, rancangan solusi ini menerapkan Model Pendanaan Sirkular (\textit{Circular Economy}) yang menggabungkan dua sumber likuiditas. Pertama, mekanisme \textit{Inflationary Minting} diadopsi untuk mencetak token subsidi secara otomatis pada setiap periode, menjamin ketersediaan ``gaji dasar'' bagi \textit{reviewer} meskipun tidak ada pemasukan dari penulis. Kedua, mekanisme \textit{Submission Fee} tetap diterapkan sebagai filter kualitas (\textit{spam barrier}) dan sumber nilai riil, namun dengan nominal yang terjangkau karena adanya subsidi silang dari \textit{minting}. Dana ini dikelola dalam sebuah \textit{Reward Pool} otonom yang mendistribusikan insentif secara proporsional berdasarkan bobot kualitas yang diberikan Editor.
-
-Untuk aspek infrastruktur, penelitian ini memilih untuk tidak menggunakan \textit{Sidechain} publik maupun \textit{Mainnet} Ethereum secara langsung dikarenakan volatilitas biaya transaksi (\textit{gas fee}) yang tidak terprediksi dan risiko keamanan data pada jaringan publik. Sebagai gantinya, solusi dirancang menggunakan \textit{Consortium Blockchain} (seperti Hyperledger Besu) yang dikelola secara privat. Pendekatan ini memungkinkan transaksi insentif (\textit{minting} dan transfer) dilakukan dengan biaya nol (\textit{gas-free}) bagi pengguna akhir, serta menjamin privasi data \textit{reviewer} yang hanya dapat diakses oleh \textit{node-node} terotorisasi dalam jaringan kampus.
-
-Dalam hal pengelolaan aset, rancangan solusi memanfaatkan \textit{MetaMask} sebagai antarmuka dompet digital standar yang dihubungkan ke jaringan privat. Pengembangan difokuskan pada logika \textit{Smart Contract} untuk memisahkan saldo token ERC-20 (insentif finansial) dan SBT (reputasi akademik) di dalam dompet tersebut, serta integrasi fungsi pemanggilan kontrak (\textit{contract calls}) pada kode sumber OJS yang sudah ada. Secara teknis, SBT diimplementasikan menggunakan standar \textit{Non-Fungible Token} (NFT) tipe ERC-721 yang dimodifikasi dengan menonaktifkan fitur transfer, menjadikannya sertifikat digital permanen yang melekat pada identitas \textit{reviewer}. Fitur \textit{Held-Back Vault} juga ditanamkan dalam logika kontrak pintar sebagai mekanisme jaminan mutu, di mana sebagian dana penulis dikunci sementara waktu untuk memitigasi risiko kecurangan pasca-publikasi.
+    \item \textbf{Algoritma Distribusi dan Manajemen Aset (Execution Logic):}
+    Implementasi teknis pada \textit{Smart Contract} mengatur aliran aset melalui dua fase atomik. Logika eksekusi memisahkan sumber dana (Transfer vs Minting) untuk transparansi audit.
+    
+    \begin{itemize}
+        \item Fase 1 (Deposit Author): Memvalidasi komitmen penulis.
+        
+        {\footnotesize \setlength{\baselineskip}{0.8em} % Memadatkan jarak baris
+        \begin{verbatim}
+FUNCTION SubmitArticle(Fee):
+    IF msg.value < Fee THEN REVERT("Dana Kurang")
+    ELSE LOCK_TO_POOL(msg.value); EMIT Event("Deposit_OK")
+        \end{verbatim}
+        }
+        \vspace{-0.5em}
+        
+        \item Fase 2 (Distribusi Hibrida): Dipicu oleh Editor. Memecah eksekusi menjadi dua vektor aset secara simultan (Ekonomi \& Reputasi).
+        
+        {\footnotesize \setlength{\baselineskip}{0.8em} % Memadatkan jarak baris
+        \begin{verbatim}
+FUNCTION DistributeReward(Reviewer, Score Q):
+    IF Q <= T_min THEN RETURN 0
+    Subsidi = (K * (Q - T_min) / Vol)          // Minting
+        
+    // 2. Eksekusi Atomik (Multi-Source Funding)
+    TRANSFER_ERC20(Pool -> Reviewer, Base_Fee) // Dana Author
+    MINT_ERC20(Reviewer, Subsidi)              // Inflasi Sistem
+          
+    // 3. Eksekusi Reputasi (Non-Transferable)
+    MINT_SBT(Reviewer, Metadata={Score:Q})     // Vektor Reputasi
+    SET SBT.Transferable = FALSE
+        \end{verbatim}
+        }
+        \vspace{-0.5em}
+    \end{itemize}
+    
+    Logika di atas memastikan bahwa \textit{Reviewer} menerima kompensasi finansial yang likuid dari dua sumber berbeda, namun reputasi akademik (SBT) terkunci permanen pada identitas mereka.
+    
+    \item \textbf{Arsitektur Interaksi Sistem (Oracle Protocol Design):}
+    Untuk menjembatani kesenjangan antara OJS (\textit{Off-chain}) dan Blockchain (\textit{On-chain}) sesuai analisis masalah pertama, dirancang protokol komunikasi satu arah (\textit{One-Way Peg}) dengan peran Editor sebagai \textit{Trusted Oracle}. Alur interaksi dibagi menjadi tiga tahap sekuensial:
+    
+    \begin{itemize}
+        \item Tahap 1: Inisiasi dan Validasi (Off-Chain Trigger):
+        Proses dimulai di antarmuka OJS. Ketika Editor mengubah status artikel menjadi "Published", modul \textit{backend} OJS memaketkan data variabel (ID Reviewer, Skor $Q$, dan Alamat Wallet) menjadi struktur data JSON terstandarisasi (\textit{Payload}).
+        
+        \item Tahap 2: Penandatanganan Transaksi (Secure Bridging):
+        Agar data yang dikirim ke Blockchain valid dan tidak dipalsukan, transaksi harus ditandatangani secara kriptografi (\textit{Digital Signature}) menggunakan \textit{Private Key} milik Editor atau Jurnal yang terdaftar sebagai \textit{Oracle} di \textit{Smart Contract}. Ini mencegah serangan injeksi data dari pihak luar.
+        
+        \item Tahap 3: Eksekusi dan Konfirmasi (On-Chain Settlement):
+        Fungsi \textit{Smart Contract} menerima payload, memverifikasi tanda tangan pengirim (\textit{Signature Verification}), dan jika valid, langsung memicu fungsi distribusi aset (Poin 2). Hash transaksi kemudian dikembalikan ke OJS sebagai bukti pembayaran yang transparan.
+    \end{itemize}
+\end{enumerate}

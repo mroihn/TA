@@ -3,53 +3,44 @@
 
 \section{Latar Belakang}
 
-Dalam beberapa tahun terakhir, sistem peer review telah menjadi komponen krusial dalam menjaga integritas dunia akademis dan ilmiah. Peer review adalah proses validasi di mana karya ilmiah dievaluasi oleh para ahli di bidang yang sama sebelum diterbitkan. Namun, ekosistem ini kini menghadapi krisis keberlanjutan karena laju pertumbuhan artikel yang dikirimkan tumbuh jauh lebih cepat daripada ketersediaan reviewer yang bersedia \cite{horta2024crisis}.
+Sistem publikasi ilmiah tradisional telah menjadi tulang punggung penyebaran pengetahuan selama berabad-abad, dimulai dari kemunculan jurnal akademis pertama seperti \textit{Journal des Sçavans} dan \textit{Philosophical Transactions} pada tahun 1665 \cite{Banks2018Thoughts}. Sistem ini melibatkan proses \textit{peer review} yang dikelola oleh penerbit terpusat, di mana \textit{editor} dan \textit{reviewer} mengevaluasi naskah sebelum publikasi. Namun, model ini dinilai bermasalah karena membebankan biaya tinggi, menghilangkan hak cipta penulis, serta kurang transparan dan minim insentif bagi kontributor seperti \textit{reviewer} \cite{Bestas2023Blockchain}. Selain rentan terhadap bias, proses ini sangat lambat dengan durasi peninjauan hingga 12 bulan \cite{Banks2018Thoughts} dan mengalami krisis kredibilitas akibat rendahnya tingkat reproduktifitas penelitian, yang pada akhirnya menghambat validasi dan penyebaran ilmu pengetahuan \cite{niya2019blockchain,Bestas2023Blockchain}.
 
-Menurut Horta et al. \cite{horta2024crisis}, dunia akademik saat ini berada di era "publish or perish", di mana terdapat dorongan eksternal yang kuat untuk mempublikasikan karya, namun hampir tidak ada insentif yang setara untuk melakukan review. Ketimpangan ini berhubungan erat dengan psikologis motivasi para reviewer. Secara historis, reviewer bekerja karena motivasi intrinsik (moral, tanggung jawab ilmiah, dan komitmen komunitas) \cite{squazzoni2013incentive}. Namun, upaya memberikan insentif material secara gegabah justru berpotensi memicu dampak negatif yang dikenal sebagai \textit{Crowding Effect}, di mana insentif eksternal dapat mengikis motivasi intrinsik seseorang \cite{squazzoni2013incentive}.
+\textit{Open Access Publication} (OA) hadir sebagai solusi untuk mengatasi hambatan aksesibilitas dan biaya dalam penyebaran karya ilmiah. Mengacu pada \cite{Suber2012OpenAccess}, OA didefinisikan sebagai literatur digital yang tersedia secara daring, bebas biaya, serta terbebas dari sebagian besar batasan hak cipta dan lisensi, sehingga memungkinkan pemanfaatan hasil penelitian tanpa hambatan finansial maupun legal. Dalam ekosistem \textit{Open Science}, konsep ini diperluas melalui penerapan \textit{Open Peer Review} (OPR). \cite{ross-hellauer2017} mendeskripsikan OPR sebagai istilah payung bagi berbagai model ulasan, seperti saling membuka identitas penulis dan penelaah, mempublikasikan laporan hasil ulasan, serta membuka partisipasi bagi komunitas yang lebih luas. Praktik ini bertujuan meningkatkan transparansi dan akuntabilitas proses evaluasi, sekaligus memberikan rekognisi yang layak atas kontribusi para penelaah. Lebih lanjut, \cite{Gasparyan2019JKMS} menegaskan bahwa OA memerlukan pendekatan komprehensif yang tidak hanya terbatas pada penyediaan akses gratis, melainkan juga mencakup peningkatan transparansi dalam proses ulasan, kepatuhan terhadap standar etika, serta diversifikasi metrik evaluasi untuk mengukur dampak penelitian secara lebih akurat.
 
-Untuk mengatasi krisis ini, diperlukan pendekatan teknologi baru yang mampu mengelola insentif secara transparan dan otomatis. Integrasi teknologi \textit{blockchain}, \textit{smart contract}, dan \textit{crypto wallet} menawarkan solusi potensial untuk menciptakan sistem insentif yang terdesentralisasi dan adil \cite{han2022blockchainincentivemechanisms}. Namun, tantangan utamanya bukan sekadar mendigitalkan pembayaran, melainkan bagaimana merancang arsitektur sistem yang tidak hanya memberikan imbalan moneter, tetapi juga mengakomodasi insentif non-moneter (reputasi). 
+Sistem publikasi ilmiah berbasis \textit{blockchain} yang diusulkan oleh \cite{Bestas2023Blockchain} memanfaatkan \textit{smart contracts} untuk menjalankan protokol kesepakatan secara otonom, sehingga meminimalkan intervensi manusia dalam pengambilan keputusan administratif. Melalui kode yang dieksekusi otomatis di jaringan \textit{Ethereum}, sistem ini mampu menyeleksi \textit{editor} dan penelaah yang paling relevan serta mendistribusikan insentif (\textit{rewards}) secara langsung kepada seluruh kontributor tanpa perantara. Mekanisme otonom ini secara signifikan mengurangi bias dan hambatan birokrasi manual, menciptakan proses evaluasi yang lebih cepat, transparan, dan objektif.
 
-Berdasarkan studi pada platform komunitas \textit{blockchain} seperti Steemit, sistem insentif yang berkelanjutan harus bersifat multi-dimensi, yakni mampu menggabungkan aspek ekonomi, sosial, dan kepemilikan aset dengan seimbang \cite{liu2022steemit}. Oleh karena itu, diperlukan sebuah perancangan sistem yang mengintegrasikan mekanisme ekonomi sirkular dengan validasi kualitas terpusat ke dalam infrastruktur \textit{Open Journal Systems} (OJS), guna menciptakan ekosistem insentif yang otonom tanpa merusak integritas akademik.
+\textit{Distributed Ledger Technology} (DLT), khususnya \textit{blockchain}, menawarkan infrastruktur teknis untuk mewujudkan sistem publikasi yang \textit{open} dan \textit{autonomous} melalui pencatatan yang \textit{immutable}, transparansi penuh, dan eksekusi \textit{smart contract} yang \textit{trustless}. Beberapa penelitian telah mengeksplorasi penerapan \textit{blockchain} dalam publikasi ilmiah dengan fokus yang berbeda-beda. \textit{CryptSubmit} \cite{gipp2017cryptsubmit} berfokus pada \textit{timestamping} menggunakan \textit{Bitcoin blockchain} untuk memberikan bukti kepemilikan intelektual yang terverifikasi dan mencegah plagiarisme. Platform yang diusulkan \cite{Bestas2023Blockchain} mengimplementasikan \textit{autonomous assignment} dan \textit{reward distribution} menggunakan \textit{Ethereum smart contracts} untuk mengurangi bias dan mempercepat proses \textit{review}. Sementara itu, \textit{Eureka} \cite{niya2019blockchain} mengembangkan \textit{token-based incentive mechanism} untuk memberikan \textit{reward} bagi semua kontributor dalam proses publikasi, termasuk \textit{reviewer}, \textit{editor}, dan \textit{cited authors}.
+
+Meskipun penelitian-penelitian tersebut menunjukkan potensi \textit{blockchain} dalam publikasi ilmiah, masih terdapat \textit{gap} signifikan dalam literatur. Sistem yang diusulkan umumnya hanya fokus pada aspek spesifik seperti \textit{timestamping}, \textit{assignment}, atau \textit{reward mechanism}, tanpa mengintegrasikan seluruh siklus publikasi secara \textit{end-to-end}. Oleh karena itu, penelitian ini bertujuan mengembangkan sistem publikasi ilmiah yang mengintegrasikan tiga karakteristik utama: \textit{open} untuk memastikan aksesibilitas penelitian tanpa hambatan, \textit{autonomous operation} melalui \textit{smart contracts} untuk mengurangi bias dan meningkatkan efisiensi, dan \textit{distributed ledger technology} untuk menjamin transparansi dan \textit{immutability} seluruh proses publikasi. Sistem terintegrasi ini diharapkan dapat mengatasi keterbatasan penelitian sebelumnya dengan menyediakan solusi komprehensif yang mencakup \textit{submission}, \textit{peer review}, \textit{reward distribution}, dan \textit{dissemination} dalam satu platform \textit{blockchain} yang kohesif.
 
 \section{Rumusan Masalah}
 
-Berdasarkan latar belakang di atas, rumusan masalah dalam penelitian ini adalah sebagai berikut:
-\begin{enumerate}
-    \item Bagaimana merancang mekanisme distribusi insentif hibrida pada \textit{Smart Contract} yang mampu menggabungkan sumber pendanaan dinamis untuk menjamin keberlanjutan dana insentif di OJS?
-    \item Bagaimana merancang arsitektur integrasi sistem yang menghubungkan validasi kualitas tertutup oleh Editor di OJS (\textit{off-chain}) dengan eksekusi pembayaran otomatis dan manajemen aset reputasi pada \textit{crypto wallet} (\textit{on-chain})?
-\end{enumerate}
+Studi ini bertujuan untuk mengembangkan \textit{framework} sistem publikasi berbasis \textit{Distributed Ledger Technology} (DLT) yang mengintegrasikan \textit{workflow end-to-end} publikasi ilmiah dari \textit{submission}, \textit{peer review}, hingga \textit{publishing} dengan mengintegrasikan tiga karakteristik utama: \textit{open} untuk memastikan aksesibilitas penelitian tanpa hambatan, \textit{autonomous operation} melalui \textit{smart contracts} untuk mengurangi bias dan meningkatkan efisiensi, dan \textit{distributed ledger technology} untuk menjamin transparansi dan \textit{immutability} seluruh proses publikasi
 
 \section{Tujuan dan Ukuran Keberhasilan Pencapaian}
 
-Penelitian ini bertujuan untuk menjawab masalah yang dirumuskan di atas. Rincian tujuan beserta ukuran keberhasilannya adalah sebagai berikut:
-
-\begin{enumerate}
-    \item Mengimplementasikan algoritma insentif pada \textit{Smart Contract} yang secara otomatis mengelola alokasi dana dari biaya penulis dan subsidi sistem berdasarkan parameter validasi kualitas. Keberhasilan diukur dengan validasi fungsional logika kontrak pintar pada jaringan \textit{testnet}.
-    \item Membangun prototipe modul integrasi pada OJS yang menghubungkan pemicu dari Editor dengan dompet kripto standar (\textit{MetaMask}) untuk pengelolaan aset likuid (token ERC-20) dan aset reputasi (\textit{Soulbound Token}). Keberhasilan diukur dengan demonstrasi alur kerja sistem dari submisi hingga pencairan insentif di sisi pengguna.
-\end{enumerate}
+Berdasarkan rumusan masalah yang telah diusulkan, tujuan dari tugas akhir ini adalah mengembangkan \textit{framework} publikasi ilmiah \textit{end-to-end} berbasis \textit{Distributed Ledger Technology} (DLT) yang menyatukan karakteristik \textit{open}, \textit{autonomous}, serta \textit{distributed}. Keberhasilan pengembangan ini diukur berdasarkan validitas eksekusi otomatis fungsi-fungsi sistem, terciptanya jejak audit digital yang transparan dan aman pada jaringan \textit{blockchain}, serta terealisasinya mekanisme publikasi yang sepenuhnya objektif dan bebas diakses oleh publik.
 
 \section{Batasan Masalah}
 
 Penelitian ini memiliki batasan kajian sebagai berikut:
 \begin{enumerate}
-    \item Penelitian berfokus pada perancangan arsitektur perangkat lunak dan validasi fungsional prototipe sistem (logika \textit{smart contract} dan integrasi \textit{web3} pada OJS).
-    \item Batasan kajian tidak mencakup validasi empiris atau studi perilaku jangka panjang untuk mengukur dampak psikologis (\textit{Crowding Effect}) dari model yang diusulkan terhadap populasi reviewer nyata.
-    \item Implementasi \textit{blockchain} dilakukan pada lingkungan jaringan privat (seperti Hyperledger Besu atau simulasi lokal) dan tidak melibatkan transaksi aset kripto bernilai riil (\textit{Mainnet}).
-    \item Antarmuka dompet digital menggunakan penyedia layanan standar industri (seperti MetaMask), bukan pengembangan aplikasi \textit{wallet} baru dari awal.
+    \item \textbf{Mekanisme Modul:} Modul - Modul  yang diimplementasikan pada tugas akhir ini masih bersifat \textit{prototipe} atau \textit{proof-of-concept}. 
+    \item \textbf{Batasan Pengujian:} Pengujian fungsionalitas \textit{framework} akan dilakukan secara terbatas menggunakan metode uji kasus untuk memvalidasi alur kerja \textit{framework}. Penelitian ini tidak mencakup pengujian kinerja terhadap beban tinggi atau analisis keamanan terhadap kerentanan \textit{smart contract}.
 \end{enumerate}
 
 \section{Metodologi}
-Metodologi penelitian yang digunakan mengadopsi prinsip \textit{Design Science Research} (DSR), yang berfokus pada perancangan, implementasi, dan validasi artefak sistem. Sesuai dengan tujuan penelitian, tahapan tugas akhir ini adalah sebagai berikut:
+Penelitian ini menggunakan pendekatan metode pengembangan perangkat lunak Waterfall, Tahapan penelitian adalah sebagai berikut:
 \begin{enumerate}
-    \item \textbf{Perancangan Mekanisme Insentif:}
-    Tahap ini berfokus untuk menjawab rumusan masalah pertama. Kegiatan utamanya adalah merancang algoritma distribusi dana yang menggabungkan variabel biaya penulis dan inflasi sistem. \textit{Outcome} dari tahap ini adalah spesifikasi matematis dan logika bisnis \textit{smart contract}.
+    \item \textbf{Analisis Kebutuhan (\textit{Requirement Analysis}):}
+    Tahap ini berfokus pada analisis kebutuhan fungsional sistem publikasi.
     
-    \item \textbf{Perancangan Arsitektur Sistem Terintegrasi:}
-    Tahap ini berfokus untuk menjawab rumusan masalah kedua. Kegiatan utamanya adalah merancang arsitektur teknis yang menghubungkan kode sumber OJS eksisting dengan jaringan \textit{blockchain}, serta pemetaan fungsi manajemen aset hibrida pada \textit{wallet}.
+    \item \textbf{Perancangan Sistem (\textit{System Design}):}
+    Tahap ini menerjemahkan kebutuhan ke dalam rancangan arsitektur teknis. Kegiatan utamanya meliputi perancangan diagram alur data (\textit{Data Flow Diagram}), perancangan struktur data pada \textit{Smart Contract}, dan desain protokol interaksi antar-sistem. \textit{Outcome} dari tahap ini adalah dokumen spesifikasi desain sistem publikasi.
     
-    \item \textbf{Implementasi Prototipe:} 
-    Pada tahap ini, artefak yang dirancang pada tahap sebelumnya akan diimplementasikan ke dalam kode program. Kegiatan utamanya meliputi pengembangan \textit{Smart Contract} (Solidity) dan pengembangan modul integrasi pada antarmuka OJS.
+    \item \textbf{Implementasi (\textit{Implementation}):}
+    Tahap penerjemahan desain ke dalam kode program. Fokus kegiatan adalah pengembangan \textit{DApps}, serta pembuatan skrip pengujian.
     
-    \item \textbf{Validasi Fungsional dan Demonstrasi:}
-    Tahap ini berfokus untuk memvalidasi pencapaian tujuan penelitian. Validasi dilakukan melalui pengujian \textit{black-box} pada fungsi \textit{smart contract} dan demonstrasi skenario penggunaan (\textit{use case}) untuk membuktikan bahwa sistem dapat mendistribusikan insentif moneter dan reputasi secara akurat sesuai pemicu dari Editor.
+    \item \textbf{Pengujian (\textit{Testing}):}
+    Tahap verifikasi untuk memastikan implementasi berjalan sesuai tujuan. Pengujian dilakukan dengan metode \textit{Unit Testing} dan simulasi skenario transaksi pada jaringan lokal (\textit{Local Testnet}).
 \end{enumerate}
