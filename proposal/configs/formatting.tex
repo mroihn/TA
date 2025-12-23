@@ -20,6 +20,7 @@
 \titleformat{\subsubsubsection}{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}  % Format font/size/numbering
 \titlespacing*{\subsubsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}     % Control spacing above/below heading
 
+\renewcommand{\chaptername}{BAB}
 % --- Chapter title formatting ---
 \renewcommand{\thechapter}{\Roman{chapter}}               % Use Roman numerals for chapter numbering
 \chapterfont{\centering \large}                           % Center and enlarge chapter titles
@@ -115,6 +116,7 @@
   \endgroup
 }
 
+\renewcommand{\contentsname}{Daftar Isi}
 \renewcommand{\tableofcontents}{
   \chapter*{\contentsname}
   % \addcontentsline{toc}{chapter}{\contentsname}
