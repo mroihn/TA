@@ -2,94 +2,39 @@
 
 \section{Analisis Masalah}
 
-Berdasarkan kajian literatur, penerapan insentif blockchain pada ekosistem publikasi ilmiah menghadapi tiga tantangan fundamental yang saling berkaitan:
+Penelitian-penelitian terdahulu yang mengintegrasikan DLT dalam publikasi ilmiah memiliki keterbatasan. \textit{CryptSubmit} \cite{gipp2017cryptsubmit} berfokus pada \textit{timestamping} menggunakan \textit{blockchain} untuk memberikan bukti kepemilikan intelektual yang terverifikasi dan mencegah plagiarisme. Platform yang diusulkan \cite{Bestas2023Blockchain} mengimplementasikan \textit{autonomous assignment} dan \textit{reward distribution} menggunakan \textit{Ethereum smart contracts} untuk mengurangi bias dan mempercepat proses \textit{review}. Sementara itu, \textit{Eureka} \cite{niya2019blockchain} mengembangkan \textit{token-based incentive mechanism} untuk memberikan \textit{reward} bagi semua kontributor dalam proses publikasi, termasuk \textit{reviewer}, \textit{editor}, dan \textit{cited authors}.
 
-Pertama, terdapat ketidaksesuaian mekanisme validasi. Mayoritas model insentif terdesentralisasi saat ini mengandalkan \textit{crowd-voting} (suara terbanyak) untuk menentukan kualitas konten. Pendekatan ini tidak kompatibel dengan standar \textit{Open Journal System} (OJS) yang mewajibkan \textit{expert peer-review} tertutup (\textit{double-blind}) untuk menjaga objektifitas ilmiah. Ketiadaan mekanisme yang dapat menjembatani keputusan editorial tertutup (Off-chain) dengan eksekusi transparan di Blockchain (On-chain) menyebabkan sulitnya mengadopsi teknologi ini tanpa merombak total alur kerja akademik yang sudah mapan.
+Meskipun penelitian-penelitian tersebut menunjukkan potensi \textit{blockchain} dalam publikasi ilmiah, masih terdapat \textit{gap} signifikan dalam literatur. Sistem yang diusulkan umumnya hanya fokus pada aspek spesifik seperti \textit{timestamping}, \textit{assignment}, atau \textit{reward mechanism}, tanpa mengintegrasikan seluruh siklus publikasi secara \textit{end-to-end}. Oleh karena itu, penelitian ini bertujuan mengembangkan sistem publikasi ilmiah yang mengintegrasikan tiga karakteristik utama: \textit{open} untuk memastikan aksesibilitas penelitian tanpa hambatan, \textit{autonomous operation} melalui \textit{smart contracts} untuk mengurangi bias dan meningkatkan efisiensi, dan \textit{distributed ledger technology} untuk menjamin transparansi dan \textit{immutability} seluruh proses publikasi. Sistem terintegrasi ini diharapkan dapat mengatasi keterbatasan penelitian sebelumnya dengan menyediakan solusi komprehensif yang mencakup \textit{submission}, \textit{peer review}, \textit{reward distribution}, dan \textit{dissemination} dalam satu platform \textit{blockchain} yang kohesif.
 
-Kedua, terjadi dilema keberlanjutan pendanaan. Model insentif yang bergantung sepenuhnya pada biaya penulis (\textit{Submission Fee}) menciptakan hambatan partisipasi (\textit{Barrier to Entry}) bagi peneliti dengan dana terbatas. Sebaliknya, model yang hanya mengandalkan pencetakan token baru (\textit{Inflationary Minting}) berisiko tinggi menciptakan aset tanpa nilai riil (\textit{hyperinflation}) jika tidak diimbangi oleh permintaan pasar. Diperlukan mekanisme hibrida yang mampu menyeimbangkan beban biaya penulis dengan subsidi sistem secara proporsional.
-
-Ketiga, risiko jual beli nilai akademik(SBT) akibat ketiadaan pemisahan fungsi aset. Dalam sistem konvensional maupun kripto sederhana, insentif finansial dan reputasi seringkali direpresentasikan oleh aset yang sama (likuid). Hal ini berbahaya karena reputasi seorang penelaah berpotensi diperjualbelikan layaknya komoditas pasar, yang pada akhirnya mendegradasi motivasi intrinsik (\textit{moral obligation}) menjadi motivasi transaksional semata. Diperlukan arsitektur manajemen aset yang secara tegas memisahkan insentif menjadi dua entitas: aset likuid untuk kebutuhan ekonomi dan aset terikat (\textit{soulbound}) untuk identitas reputasi.
 \section{Rancangan Solusi}
 
-Dari analisis masalah, diusulkan solusi mekanisme insentif hibrida dengan arsitektur interaksi sistem yang terdiri dari tiga komponen logika utama:
-
+Berdasarkan analisis masalah di atas, Tugas Akhir ini mengusulkan rancangan sistem publikasi ilmiah \textit{end-to-end} yang bersifat terbuka, otonom, dan berbasis DLT. Dengan mengadaptasi model alur kerja sistem publikasi konvensional \cite{Donovan2018Reflective} \cite{Rampelotto2023PeerReview}, alur kerja sistem yang diusulkan didefinisikan sebagai berikut:
 \begin{enumerate}
-    \item \textbf{Formulasi Mekanisme Pendanaan (Funding Algorithm):} 
-    Sistem menggunakan model probabilistik untuk menentukan total insentif ($I_{total}$) berdasarkan Skor Kualitas ($Q$). Mekanisme ini menggabungkan dana riil dari penulis ($F_{base}$) dan subsidi inflasi terkontrol ($M_{subsidy}$).
-    
-    Total insentif diformulasikan sebagai fungsi dari Skor Kualitas ($Q$) sebagai berikut:
-    
-    \begin{equation}
-        I_{total}(Q) = 
-        \begin{cases} 
-        F_{base} + \underbrace{\left( k \cdot \frac{1}{V_{net}} \cdot (Q - T_{min}) \right)}_{M_{subsidy} \text{ (Komponen Minting)}} & \text{jika } Q > T_{min} \\
-        0 & \text{jika } Q \leq T_{min}
-        \end{cases}
-    \end{equation}
-    
-    Dimana $F_{base}$ adalah biaya dasar penulis, $k$ adalah konstanta subsidi, dan $T_{min}$ adalah ambang batas kualitas.
-    
-    Analisis Komponen Minting ($M_{subsidy}$):
-    Pencetakan token baru (\textit{Minting}) tidak dilakukan secara linier, melainkan diatur oleh algoritma dinamis dengan kondisi ketat untuk mencegah hiperinflasi:
-    \begin{itemize}
-        \item Kondisi Kelayakan ($Q > T_{min}$): Minting bersifat \textit{performance-based}. Sistem tidak akan mencetak token untuk ulasan di bawah standar kualitas, sehingga inflasi hanya terjadi untuk membayar "nilai tambah" (\textit{added value}).
-        \item Elastisitas Suplai ($\frac{1}{V_{net}}$): Variabel $V_{net}$ didefinisikan sebagai Volume Submisi Jaringan per Epoch (rata-rata aktivitas dalam periode waktu tertentu, misal 30 hari), bukan total akumulatif sejak awal sistem. 
-        
-        % Mekanisme ini bertindak sebagai faktor deflasi dinamis yang responsif:
-        % \begin{itemize}
-        %     \item Saat aktivitas jaringan tinggi ($V_{net}$ besar), subsidi per artikel mengecil untuk mencegah banjir pasokan token (\textit{hyperinflation}).
-        %     \item Definisi berbasis \textit{epoch} mencegah nilai pembagi membesar tanpa batas seiring waktu, yang dapat menyebabkan subsidi mendekati nol ($0$) di masa depan. Hal ini menjamin insentif tetap relevan bagi partisipan jangka panjang.
-        % \end{itemize}
-    \end{itemize}
+    \item \textbf{\textit{Submission} :} 
+    Penulis mengunggah naskah melalui \textit{platform} terdesentralisasi. Sistem secara otomatis melakukan \textit{hashing} terhadap dokumen dan mencatat \textit{timestamp} pada \textit{blockchain} sebagai bukti kepemilikan intelektual yang valid. \textit{Metadata} artikel diekstraksi dan \textit{hash} penyimpanannya dicatat pada \textit{distributed ledger}, sementara \textit{smart contract} merekam waktu pengajuan secara permanen untuk mencegah manipulasi data.
+    \item \textbf{\textit{Initial Check} :} 
+    \textit{Smart contract} mengeksekusi pemeriksaan otomatis terhadap format dokumen, kelengkapan \textit{metadata}, dan indikasi plagiarisme awal. Pada tahap ini, sistem juga memverifikasi saldo \textit{token}/\textit{cryptocurrency} penulis untuk memastikan ketersediaan biaya proses \textit{review}. Seluruh pemeriksaan teknis ini dilakukan tanpa intervensi manusia guna menjamin objektivitas prosedural.
+    \item \textbf{\textit{Editorial Pre-check} :} 
+    \textit{Smart contract} melakukan evaluasi kesesuaian naskah dengan cakupan (\textit{scope}) jurnal serta kualitas metodologi. Keputusan \textit{editor} (\textit{smart contract}) dicatat secara transparan di dalam \textit{blockchain}.
+    \item \textbf{\textit{Peer Review} :} 
+    \textit{Smart contract} menunjuk \textit{reviewer} secara otomatis berdasarkan riwayat kinerja yang tersimpan di \textit{blockchain}, dengan algoritma yang mencegah pemilihan rekan satu institusi atau kolaborator dekat untuk menghindari \textit{bias}. Laporan hasil tinjauan (\textit{review reports}) di-\textit{hash} dan disimpan secara \textit{immutable}. Sistem menerapkan model \textit{open peer review} untuk menjamin transparansi dan akuntabilitas proses penilaian.
+    \item \textbf{\textit{Editorial Post-review} :} 
+    Berdasarkan laporan \textit{reviewer}, \textit{smart contract} memfasilitasi pengambilan keputusan akhir (terima, revisi, atau tolak). Keputusan ini dicatat secara permanen di \textit{blockchain}, sehingga rekam jejak keputusan \textit{editorial} dapat diaudit sewaktu-waktu.
+    \item \textbf{\textit{Revision and Resubmission} :} 
+    Penulis melakukan revisi berdasarkan umpan balik \textit{reviewer}. Perubahan pada naskah dilacak menggunakan \textit{version control} berbasis \textit{blockchain}, di mana naskah revisi di-\textit{hash} ulang dan dibandingkan secara otomatis dengan versi sebelumnya. Hal ini memungkinkan \textit{reviewer} memverifikasi poin revisi secara efisien tanpa perlu membaca ulang keseluruhan naskah.
+    \item \textbf{\textit{Final Acceptance & Reward Distribution} :} 
+    Setelah status \textit{Final Acceptance} tercapai, \textit{smart contract} secara otomatis mengeksekusi distribusi insentif (\textit{token}) kepada \textit{reviewer}, \textit{editor}, dan penulis yang karyanya disitasi (\textit{cited authors}), memastikan kompensasi yang adil dan instan.
+    \item \textbf{\textit{Publication} :} 
+    Artikel yang diterbitkan disimpan secara penuh (\textit{full-text}) pada penyimpanan terdistribusi (seperti IPFS), sementara \textit{hash} referensinya dicatat di \textit{blockchain}.
+    \item \textbf{\textit{Post-Publication} :} 
+    Sistem mendukung \textit{open post-publication peer review}, memungkinkan komunitas ilmiah memberikan masukan berkelanjutan terhadap artikel yang telah terbit. Segala pembaruan dikelola melalui mekanisme \textit{versioning} berbasis \textit{blockchain}.
+\end{enumerate}
 
-    \item \textbf{Algoritma Distribusi dan Manajemen Aset (Execution Logic):}
-    Implementasi teknis pada \textit{Smart Contract} mengatur aliran aset melalui dua fase atomik. Logika eksekusi memisahkan sumber dana (Transfer vs Minting) untuk transparansi audit.
-    
-    \begin{itemize}
-        \item Fase 1 (Deposit Author): Memvalidasi komitmen penulis.
-        
-        {\footnotesize \setlength{\baselineskip}{0.8em} % Memadatkan jarak baris
-        \begin{verbatim}
-FUNCTION SubmitArticle(Fee):
-    IF msg.value < Fee THEN REVERT("Dana Kurang")
-    ELSE LOCK_TO_POOL(msg.value); EMIT Event("Deposit_OK")
-        \end{verbatim}
-        }
-        \vspace{-0.5em}
-        
-        \item Fase 2 (Distribusi Hibrida): Dipicu oleh Editor. Memecah eksekusi menjadi dua vektor aset secara simultan (Ekonomi \& Reputasi).
-        
-        {\footnotesize \setlength{\baselineskip}{0.8em} % Memadatkan jarak baris
-        \begin{verbatim}
-FUNCTION DistributeReward(Reviewer, Score Q):
-    IF Q <= T_min THEN RETURN 0
-    Subsidi = (K * (Q - T_min) / Vol)          // Minting
-        
-    // 2. Eksekusi Atomik (Multi-Source Funding)
-    TRANSFER_ERC20(Pool -> Reviewer, Base_Fee) // Dana Author
-    MINT_ERC20(Reviewer, Subsidi)              // Inflasi Sistem
-          
-    // 3. Eksekusi Reputasi (Non-Transferable)
-    MINT_SBT(Reviewer, Metadata={Score:Q})     // Vektor Reputasi
-    SET SBT.Transferable = FALSE
-        \end{verbatim}
-        }
-        \vspace{-0.5em}
-    \end{itemize}
-    
-    Logika di atas memastikan bahwa \textit{Reviewer} menerima kompensasi finansial yang likuid dari dua sumber berbeda, namun reputasi akademik (SBT) terkunci permanen pada identitas mereka.
-    
-    \item \textbf{Arsitektur Interaksi Sistem (Oracle Protocol Design):}
-    Untuk menjembatani kesenjangan antara OJS (\textit{Off-chain}) dan Blockchain (\textit{On-chain}) sesuai analisis masalah pertama, dirancang protokol komunikasi satu arah (\textit{One-Way Peg}) dengan peran Editor sebagai \textit{Trusted Oracle}. Alur interaksi dibagi menjadi tiga tahap sekuensial:
-    
-    \begin{itemize}
-        \item Tahap 1: Inisiasi dan Validasi (Off-Chain Trigger):
-        Proses dimulai di antarmuka OJS. Ketika Editor mengubah status artikel menjadi "Published", modul \textit{backend} OJS memaketkan data variabel (ID Reviewer, Skor $Q$, dan Alamat Wallet) menjadi struktur data JSON terstandarisasi (\textit{Payload}).
-        
-        \item Tahap 2: Penandatanganan Transaksi (Secure Bridging):
-        Agar data yang dikirim ke Blockchain valid dan tidak dipalsukan, transaksi harus ditandatangani secara kriptografi (\textit{Digital Signature}) menggunakan \textit{Private Key} milik Editor atau Jurnal yang terdaftar sebagai \textit{Oracle} di \textit{Smart Contract}. Ini mencegah serangan injeksi data dari pihak luar.
-        
-        \item Tahap 3: Eksekusi dan Konfirmasi (On-Chain Settlement):
-        Fungsi \textit{Smart Contract} menerima payload, memverifikasi tanda tangan pengirim (\textit{Signature Verification}), dan jika valid, langsung memicu fungsi distribusi aset (Poin 2). Hash transaksi kemudian dikembalikan ke OJS sebagai bukti pembayaran yang transparan.
-    \end{itemize}
+\subsection{Kakas Pengembangan Sistem}
+Pengembangan prototipe sistem publikasi ilmiah berbasis DLT akan diimplementasikan dengan kakas pemodelan sistem dan kakas pengembangan sebagai berikut:
+\begin{enumerate}
+    \item \textbf{\textit{Platform} DLT :} Tugas Akhir ini menggunakan \textit{blockchain} yang kompatibel dengan \textit{Ethereum}. Pemilihan ini didasarkan pada kematangan ekosistem \textit{smart contract} dan dukungan komunitas pengembang yang luas. Spesifikasi implementasi meliputi:  
+    \item \textbf{\textit{Development Environment} :} Menggunakan \textit{Hardhat} untuk keperluan kompilasi, pengujian (\textit{testing}), dan \textit{deployment smart contract}
+    \item \textbf{\textit{Smart Contract Language} :} Menggunakan bahasa pemrograman \textit{Solidity}.
+    \item \textbf{\textit{Blockchain Network} :} Menggunakan \textit{public testnet Sepolia} (\textit{Ethereum}) sebagai lingkungan pengujian dan pengembangan untuk mensimulasikan kondisi jaringan yang realistis.
 \end{enumerate}
