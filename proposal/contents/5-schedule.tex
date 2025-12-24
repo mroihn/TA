@@ -3,4 +3,21 @@
 % ----- JUDUL BAB -----
 \chapter{Jadwal Kegiatan}
 
-Bab ini memuat rencana jadwal kegiatan selama pengerjaan tugas akhir.
+\section{Jadwal}
+
+Jadwal Kegiatan Tugas Akhir dapat dilihat pada Gambar berikut.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/schedule.png}
+    \caption{Jadwal Kegiatan Tugas Akhir}
+    \label{fig:schedule}
+\end{figure}
+
+\section{Risiko}
+Terdapat risiko-risiko yang mungkin dihadapi dalam pengerjaan Tugas Akhir. Risiko-risiko yang mungkin dihadapi mencakup risiko dari sisi teknis pengembangan Smart Contract, risiko integrasi sistem terdistribusi, dan risiko operasional selama pengujian. Beberapa risiko tertinggi yang mungkin dihadapi adalah sebagai berikut:
+\begin{enumerate}
+    \item \textbf{Keterbatasan Lingkungan Pengujian (\textit{Testnet}):} Ketergantungan pada Public Testnet Sepolia  memiliki risiko kemacetan jaringan atau keterbatasan perolehan faucet ETH yang dapat menghambat proses pengujian integrasi. Risiko ini dapat dihadapi dengan memprioritaskan pengujian fungsional utama pada jaringan lokal (Hardhat Network/Ganache) yang lebih cepat dan stabil sebelum melakukan pengujian final di Sepolia.
+    \item \textbf{Keterbatasan Waktu:} Waktu yang terbatas untuk menyelesaikan Tugas Akhir dapat menjadi risiko jika tidak dikelola dengan baik. Risiko ini dapat diminimalkan dengan membuat jadwal yang realistis, mengurangi spesifikasi dan kapasitas sistem yang diimplementasikan, serta mengurangi pengujian \textit{edge case}.
+    \item \textbf{Masalah Keamanan:} Smart Contract rentan terhadap berbagai jenis serangan keamanan. Risiko ini dapat diatasi dengan mengikuti praktik terbaik dalam pengembangan smart contract dan melakukan audit keamanan sebelum implementasi akhir.
+\end{enumerate}
